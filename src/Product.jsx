@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import axios from "axios";
 import {
+  Toolbar,
   Grid,
   AppBar,
-  Icon,
+  IconButton,
   Typography,
   Button,
   Card,
@@ -96,7 +98,7 @@ const Product = () => {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
-              Guvi Products
+              Sakthi Products
             </Typography>
             <ShoppingCartIcon /> <span> {cart} </span>
             <Button color="inherit">Checkout</Button>
