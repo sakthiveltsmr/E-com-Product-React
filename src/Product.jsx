@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
-import ShoppingCartIcons from "@material-ui/icons/ShoppingCart";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import {
   Grid,
   AppBar,
@@ -82,7 +82,81 @@ const Product = () => {
   };
 
   const classes = styles();
-  return <div></div>;
+  return (
+    <div>
+      <Grid>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="menu"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" className={classes.title}>
+              Guvi Products
+            </Typography>
+            <ShoppingCartIcon /> <span> {cart} </span>
+            <Button color="inherit">Checkout</Button>
+          </Toolbar>
+        </AppBar>
+        <br />
+        <Grid container spacing={2} style={{ margin: "30px" }}>
+          {productList.map((row) => (
+            <Grid item key={row._id}>
+              <Card className={classes.rootCard} variant="outlined">
+                <CardContent>
+                  <Typography variant="h5" component="h2">
+                    {row.productName}
+                  </Typography>
+                  <Typography className={classes.posCard} color="textSecondary">
+                    Quantity : {row.quantity}
+                  </Typography>
+                  <Typography variant="body2" component="p">
+                    {row.description}
+                  </Typography>
+                  <Typography
+                    className={classes.titleCard}
+                    color="textSecondary"
+                    gutterBottom
+                  >
+                    Price : {row.price}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button
+                    size="small"
+                    onClick={() => updateProduct(row._id, row.userQuantity + 1)}
+                    disabled={row.userQuantity >= row.quantity}
+                  >
+                    +
+                  </Button>
+                  {row.userQuantity}
+                  <Button
+                    size="small"
+                    onClick={() => updateProduct(row._id, row.userQuantity - 1)}
+                    disabled={row.userQuantity === 0}
+                  >
+                    -
+                  </Button>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+        <Box className={classes.footeBox}>
+          <List className={classes.footerList}>
+            <Button> Contact US </Button>
+            <Button> ABOUT US </Button>
+            <Button> FEEDBACK </Button>
+            <Button> BRANCHES </Button>
+          </List>
+        </Box>
+      </Grid>
+    </div>
+  );
 };
 
 export default Product;
