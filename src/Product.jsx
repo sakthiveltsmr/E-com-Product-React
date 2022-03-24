@@ -56,6 +56,32 @@ const styles = makeStyles((theme) => ({
   },
 }));
 const Product = () => {
+  const [productList, setProductList] = useState([]);
+  const [cart, setCart] = useState(0);
+
+  useEffect(async () => {
+    var response = await axios.get("http://localhost:4000/product/getproduct");
+    setProductList(response.data);
+    updateCart(response);
+  }, []);
+
+  const updateProduct = async (id, quantity) => {
+    await axios.put(`http://localhost:4000/product/updateproduct/${id}`, {
+      userQuantity: quantity,
+    });
+    var response = await axios.get("http://localhost:4000/product/getproduct");
+    setProductList(response.data);
+    updateCart(response);
+  };
+
+  const updateCart = (response) => {
+    var cart = response.data.reduce((accumulator, currentValue) => {
+      return currentValue.userQuantity ? accumulator + 1 : accumulator;
+    }, 0);
+    setCart(cart);
+  };
+
+  const classes = styles();
   return <div></div>;
 };
 
