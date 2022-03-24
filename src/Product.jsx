@@ -71,9 +71,9 @@ const Product = () => {
     await axios.put(`http://localhost:4000/product/updateproduct/${id}`, {
       userQuantity: quantity,
     });
-    var response = await axios.get("http://localhost:4000/product/getproduct");
-    setProductList(response.data);
-    updateCart(response);
+    // var response = await axios.get("http://localhost:4000/product/getproduct");
+    // setProductList(response.data);
+    // updateCart(response);
   };
 
   const updateCart = (response) => {
